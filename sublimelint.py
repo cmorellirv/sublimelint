@@ -50,9 +50,12 @@ class SublimeLint(sublime_plugin.EventListener):
 		self.hit(view)
 	
 	def on_load(self, view):
-		self.hit(view)
 		self.on_new(view)
 
+	def on_activated(self, view):
+		if ( view.file_name() is not None ):
+			self.hit(view)
+	
 	def on_new(self, view):
 		Linter.assign(view)
 		settings = view.settings()
